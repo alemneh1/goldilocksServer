@@ -1,4 +1,4 @@
-package GoldilocksProd.com.Server.services;
+package GoldilocksProd.com.Server.services.musicService;
 
 
 import GoldilocksProd.com.Server.projects.MusicProject;
