@@ -10,6 +10,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
+
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -23,12 +26,12 @@ public class MusicProject extends ProjectModel {
 
     private String musicDescription;
 
+
+
     public MusicProject(Long id, String projectType, String title, int date, String musicianName, String musicDescription, String thumbnailPath, String videoPath) {
         super(id, projectType, title, date, thumbnailPath, videoPath);
         this.musicianName = musicianName;
         this.musicDescription = musicDescription;
     }
-
-
 
 }

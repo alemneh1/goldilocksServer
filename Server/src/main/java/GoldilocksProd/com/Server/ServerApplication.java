@@ -37,71 +37,12 @@ public class ServerApplication {
 			"https://www.youtube.com/watch?v=8weSLMxDczY"
 	);
 
-	MusicProject musicProject1 = new MusicProject(
-  null,
-		  "Commercial",
-		  "Selam Water",
-		  2024,
-		  "Selam Tesfaye",
-		  "Her ass is amazing",
-		  "../assets/images/music/kottume.jpg",
-		  "https://www.youtube.com/watch?v=8weSLMxDczY"
-	);
-
-	MusicProject musicProject2 = new MusicProject(
-  null,
-		  "Commercial",
-		  "New Campaign",
-		  2023,
-		  "Marketing Solutions",
-		  "Introducing our new advertising campaign",
-			"../assets/images/music/kottume.jpg",
-		  "https://www.youtube.com/watch?v=video1"
-	);
-
-	MusicProject musicProject3 = new MusicProject(
-  null,
-		  "Commercial",
-		  "Product Demo",
-		  2023,
-		  "Tech Innovations",
-		  "Experience the features of our latest product",
-			"../assets/images/music/kottume.jpg",
-		  "https://www.youtube.com/watch?v=video2"
-	);
-
-	MusicProject musicProject4 = new MusicProject(
-  null,
-		  "Commercial",
-		  "Holiday Sale",
-		  2024,
-		  "Retail Solutions",
-		  "Unbeatable discounts for the holiday season",
-			"../assets/images/music/kottume.jpg",
-		  "https://www.youtube.com/watch?v=video3"
-	);
-
-	MusicProject musicProject5 = new MusicProject(
-  null,
-		  "Commercial",
-		  "Brand Launch",
-		  2023,
-		  "Brand Management",
-		  "Introducing our new brand identity",
-			"../assets/images/music/kottume.jpg",
-		  "https://www.youtube.com/watch?v=video4"
-	);
 
 	@Bean
 	CommandLineRunner run(MusicProjectRepository musicRepo){
 		return args -> {
 			musicRepo.save(musicProject);
 			musicRepo.save(commercial);
-			musicRepo.save(musicProject1);
-			musicRepo.save(musicProject2);
-			musicRepo.save(musicProject3);
-			musicRepo.save(musicProject4);
-			musicRepo.save(musicProject5);
 		};
 	}
 }
