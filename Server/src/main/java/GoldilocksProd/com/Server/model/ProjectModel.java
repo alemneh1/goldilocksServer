@@ -24,6 +24,7 @@ public class ProjectModel {
 
     private int date;
 
+    @Column(length = 500)
     private String thumbnailPath;
 
     private String videoPath;
