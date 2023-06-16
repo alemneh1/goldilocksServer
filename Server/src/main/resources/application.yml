@@ -1,6 +1,6 @@
 spring:
   datasource:
-    password: Alex1619@
+    password: 
     url: jdbc:mysql://localhost:3306/goldilocks_db
     username: root
   jpa:
