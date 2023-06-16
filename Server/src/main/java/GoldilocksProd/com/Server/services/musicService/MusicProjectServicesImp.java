@@ -27,4 +27,11 @@ public class MusicProjectServicesImp implements musicProjectServices{
         return musicProjectRepository.findAll();
     }
 
+    @Override
+    public MusicProject createMusicProject(MusicProject musicProject) {
+        {
+            return musicProjectRepository.save(musicProject);
+        }
+    }
+
 }

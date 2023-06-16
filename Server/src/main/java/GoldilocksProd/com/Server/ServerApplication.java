@@ -34,19 +34,19 @@ public class ServerApplication {
 					2022,
 					"Biruk Jane",
 					"Kotume is ormoifa song that was produced by Goldilocks producaiton",
-					s3Service.getPresignedImageUrl("kottume.jpg", 500),
+					s3Service.getPresignedImageUrl("kottume.jpg", 5000),
 					"https://www.youtube.com/watch?v=8weSLMxDczY"
 			);
 
 			MusicProject com = new MusicProject(
 					null,
 					"Music",
-					"Kottume",
+					"Tileyaleh",
 					2022,
-					"Biruk Jane",
+					"Sosi Girma",
 					"Kotume is ormoifa song that was produced by Goldilocks producaiton",
-					s3Service.getPresignedImageUrl("commericalImage.png", 500),
-					"https://www.youtube.com/watch?v=8weSLMxDczY"
+					s3Service.getPresignedImageUrl("sos image.JPG", 500),
+					"https://www.youtube.com/watch?v=6pJnnIrNxhY"
 			);
 			musicRepo.save(musicProject);
 			musicRepo.save(com);

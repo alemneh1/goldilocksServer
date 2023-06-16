@@ -9,4 +9,6 @@ import java.util.List;
 public interface musicProjectServices {
     MusicProject addMusicProject(MusicProject musicProject);
     List<MusicProject> findAllMusicProject();
+
+    public MusicProject createMusicProject(MusicProject musicProject);
 }
