@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class ServerApplication {
 
 	public static void main(String[] args) {
