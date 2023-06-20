@@ -14,13 +14,9 @@ import java.util.List;
 @Service
 @Transactional
 @Slf4j
-public class MusicProjectServicesImp implements musicProjectServices{
+public class MusicProjectServicesImp implements MusicProjectServices {
 
     private final MusicProjectRepository musicProjectRepository;
-    @Override
-    public MusicProject addMusicProject(MusicProject musicProject) {
-        return musicProjectRepository.save(musicProject);
-    }
 
     @Override
     public List<MusicProject> findAllMusicProject() {
@@ -33,5 +29,4 @@ public class MusicProjectServicesImp implements musicProjectServices{
             return musicProjectRepository.save(musicProject);
         }
     }
-
 }

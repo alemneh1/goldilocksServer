@@ -6,6 +6,7 @@ import GoldilocksProd.com.Server.services.S3Service;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "music_table")
+@Table(name = "music_project")
 public class MusicProject extends ProjectModel {
 
     @Column(nullable = false)
@@ -27,14 +28,10 @@ public class MusicProject extends ProjectModel {
 
     private String musicDescription;
 
-   // private S3Service s3Service;
-
-
-
-    public MusicProject(Long id, String projectType, String title, int date, String musicianName, String musicDescription, String thumbnailPath, String videoPath) {
+    public MusicProject(Long id, String projectType, String title, String date, String musicianName, String musicDescription, String thumbnailPath, String videoPath) {
         super(id, projectType, title, date, thumbnailPath, videoPath);
         this.musicianName = musicianName;
         this.musicDescription = musicDescription;
-
     }
+
 }

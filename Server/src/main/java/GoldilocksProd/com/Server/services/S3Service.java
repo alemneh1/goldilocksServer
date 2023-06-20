@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class S3Service implements  FileServiceImpl{
+public class S3Service implements S3ServiceImpl {
 
     @Value("${bucketName}")
     private String bucketName;

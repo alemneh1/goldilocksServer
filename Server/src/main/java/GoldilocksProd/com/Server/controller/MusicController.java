@@ -4,6 +4,8 @@ import GoldilocksProd.com.Server.projects.MusicProject;
 import GoldilocksProd.com.Server.services.S3Service;
 import GoldilocksProd.com.Server.services.musicService.MusicProjectServicesImp;
 
+import jakarta.persistence.Entity;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class MusicController {
     public MusicProject createMusicProject(@RequestParam(value = "thumbnailImage", required = false) MultipartFile file,
                                            @RequestParam("projectType") String projectType,
                                            @RequestParam("title") String title,
-                                           @RequestParam("year") int year,
+                                           @RequestParam("year") String year,
                                            @RequestParam("musicianName") String musicianName,
                                            @RequestParam("musicDescription") String musicDescription,
                                            @RequestParam("videoPath") String videoPath) {

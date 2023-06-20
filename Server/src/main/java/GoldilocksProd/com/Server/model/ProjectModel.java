@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@Entity
+@MappedSuperclass
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +21,7 @@ public class ProjectModel {
     @Column(nullable = false)
     private String title;
 
-    private int date;
+    String date;
 
     @Column(length = 500)
     private String thumbnailPath;
