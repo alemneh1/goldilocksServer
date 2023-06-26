@@ -28,6 +28,6 @@ public class ProjectModel {
 
     private String videoPath;
 
-    // Constructors, getters, setters, and other methods
+
 
 }

@@ -95,9 +95,21 @@ public class S3Service implements S3ServiceImpl {
         return url.toString();
     }
     @Override
-    public String deleteFile(String filename) {
-        return null;
+    public String deleteFile(String presignedUrl) {
+        try {
+            // Extract the object key from the pre-signed URL
+            URL url = new URL(presignedUrl);
+            String objectKey = url.getPath().substring(1); // Remove the leading slash
+
+            // Delete the object from S3 using the object key
+            s3.deleteObject(bucketName, objectKey);
+
+            return "File deleted successfully.";
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to delete file from S3: " + e.getMessage());
+        }
     }
+
 
     @Override
     public List<String> listAll() {

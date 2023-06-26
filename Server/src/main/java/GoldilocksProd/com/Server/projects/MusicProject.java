@@ -2,7 +2,7 @@ package GoldilocksProd.com.Server.projects;
 
 
 import GoldilocksProd.com.Server.model.ProjectModel;
-import GoldilocksProd.com.Server.services.S3Service;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

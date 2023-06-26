@@ -26,7 +26,7 @@ public class CommercialController {
 
     @Autowired
     private S3Service s3Service;
-    @PostMapping(value = "/api/commercial-projects", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/api/commercial-project/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public CommercialProject createCommercialProject(@RequestParam(value = "thumbnailImage", required = false) MultipartFile file,
                                                      @RequestParam("projectType") String projectType,
                                                      @RequestParam("title") String title,
@@ -57,7 +57,7 @@ public class CommercialController {
         return commercialProjectServices.createCommercialProject(commercialProject);
     }
 
-    @GetMapping("/commercialProject/list")
+    @GetMapping("/api/commercial-project/list")
     public List<CommercialProject> listAllCommercialProject(){
         return commercialProjectServices.listAllCommercialProject();
     }

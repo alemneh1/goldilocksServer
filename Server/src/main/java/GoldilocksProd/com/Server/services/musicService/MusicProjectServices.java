@@ -11,4 +11,9 @@ public interface MusicProjectServices {
     List<MusicProject> findAllMusicProject();
 
     public MusicProject createMusicProject(MusicProject musicProject);
+    public void deleteMusicProject(MusicProject musicProject);
+
+    public MusicProject updateMusicProject(MusicProject musicProject);
+
+    public MusicProject getMusicProjectById(Long id);
 }

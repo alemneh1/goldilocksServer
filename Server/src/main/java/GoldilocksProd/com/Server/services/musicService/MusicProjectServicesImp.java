@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -29,4 +30,40 @@ public class MusicProjectServicesImp implements MusicProjectServices {
             return musicProjectRepository.save(musicProject);
         }
     }
+    @Override
+    public MusicProject updateMusicProject(MusicProject musicProject) {
+        try {
+            if (musicProjectRepository.existsById(musicProject.getId())) {
+                return musicProjectRepository.save(musicProject);
+            } else {
+                // Handle the case when the MusicProject doesn't exist
+                throw new IllegalArgumentException("MusicProject not found");
+            }
+        } catch (Exception e) {
+            // Handle exceptions appropriately (e.g., return error response, log the exception)
+            // You can customize this based on your error handling strategy
+            throw new RuntimeException("Failed to update the MusicProject: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteMusicProject(MusicProject musicProject) {
+        try {
+            if (musicProjectRepository.existsById(musicProject.getId())) {
+                musicProjectRepository.delete(musicProject);
+            } else {
+                // Handle the case when the MusicProject doesn't exist
+                throw new IllegalArgumentException("MusicProject not found");
+            }
+        } catch (Exception e) {
+            // Handle exceptions appropriately (e.g., return error response, log the exception)
+            // You can customize this based on your error handling strategy
+            throw new RuntimeException("Failed to delete the MusicProject: " + e.getMessage());
+        }
+    }
+    public MusicProject getMusicProjectById(Long id){
+        Optional<MusicProject> optionalMusicProject = musicProjectRepository.findById(id);
+        return optionalMusicProject.orElse(null);
+    }
+
 }

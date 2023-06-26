@@ -9,7 +9,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,16 +28,16 @@ import java.util.logging.Logger;
 @Slf4j
 
 public class MusicController {
-    private static final Logger logger = Logger.getLogger(MusicController.class.getName());
+
     private final MusicProjectServicesImp musicProjectServices;
     @Autowired
     private S3Service s3Service;
 
-    @PostMapping(value = "/api/music-projects", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/api/music-projects/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public MusicProject createMusicProject(@RequestParam(value = "thumbnailImage", required = false) MultipartFile file,
                                            @RequestParam("projectType") String projectType,
                                            @RequestParam("title") String title,
-                                           @RequestParam("year") String year,
+                                           @RequestParam("date") String date,
                                            @RequestParam("musicianName") String musicianName,
                                            @RequestParam("musicDescription") String musicDescription,
                                            @RequestParam("videoPath") String videoPath) {
@@ -44,13 +46,6 @@ public class MusicController {
 
         if (file != null) {
             String originalFileName = file.getOriginalFilename();
-            //String contentType = file.getContentType();
-            //long fileSize = file.getSize();
-
-//            logger.info("Original File Name: " + originalFileName);
-//            logger.info("Content Type: " + contentType);
-//            logger.info("File Size: " + fileSize);
-
             s3Service.addImage(file);
             //make sure to change this to 5 years
             musicProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
@@ -58,7 +53,7 @@ public class MusicController {
 
         musicProject.setProjectType(projectType);
         musicProject.setTitle(title);
-        musicProject.setDate(year);
+        musicProject.setDate(date);
         musicProject.setMusicianName(musicianName);
         musicProject.setMusicDescription(musicDescription);
         musicProject.setVideoPath(videoPath);
@@ -67,8 +62,57 @@ public class MusicController {
         return musicProjectServices.createMusicProject(musicProject);
     }
 
+    @PutMapping("/api/music-projects/update/{id}")
+    public MusicProject updateMusicProject(@PathVariable Long id,
+                                           @RequestParam(value = "thumbnailImage", required = false) MultipartFile file,
+                                           @RequestParam("projectType") String projectType,
+                                           @RequestParam("title") String title,
+                                           @RequestParam("date") String date,
+                                           @RequestParam("musicianName") String musicianName,
+                                           @RequestParam("musicDescription") String musicDescription,
+                                           @RequestParam("videoPath") String videoPath) {
 
-    @GetMapping("/musicProject/list")
+        // Retrieve the existing music project by ID
+        MusicProject existingMusicProject = musicProjectServices.getMusicProjectById(id);
+
+        // Update the properties of the existing music project
+        if (file != null) {
+            String originalFileName = file.getOriginalFilename();
+            s3Service.addImage(file);
+            existingMusicProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+        }
+
+        existingMusicProject.setProjectType(projectType);
+        existingMusicProject.setTitle(title);
+        existingMusicProject.setDate(date);
+        existingMusicProject.setMusicianName(musicianName);
+        existingMusicProject.setMusicDescription(musicDescription);
+        existingMusicProject.setVideoPath(videoPath);
+
+        // Save the updated music project and return the updated entity
+        return musicProjectServices.updateMusicProject(existingMusicProject);
+    }
+
+
+    @DeleteMapping("/api/music-project/delete/{id}")
+    public ResponseEntity<String> deleteMusicProject(@PathVariable Long id) {
+        try {
+            MusicProject musicProject = musicProjectServices.getMusicProjectById(id);
+            if (musicProject != null) {
+                musicProjectServices.deleteMusicProject(musicProject);
+                s3Service.deleteFile(musicProject.getThumbnailPath());
+                return ResponseEntity.ok().body("{\"message\": \"Success\"}");
+            } else {
+                // Handle the case when the MusicProject doesn't exist
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("MusicProject not found");
+            }
+        } catch (Exception e) {
+            // Handle exceptions appropriately (e.g., return error response, log the exception)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"message\": \"Failed to delete the music project\"}");
+        }
+    }
+
+    @GetMapping("/api/music-project/list/")
     public List<MusicProject> list() {
         return musicProjectServices.findAllMusicProject();
     }
