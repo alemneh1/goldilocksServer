@@ -100,7 +100,7 @@ public class MusicController {
             MusicProject musicProject = musicProjectServices.getMusicProjectById(id);
             if (musicProject != null) {
                 musicProjectServices.deleteMusicProject(musicProject);
-                s3Service.deleteFile(musicProject.getThumbnailPath());
+                s3Service.deleteImage(musicProject.getThumbnailPath());
                 return ResponseEntity.ok().body("{\"message\": \"Success\"}");
             } else {
                 // Handle the case when the MusicProject doesn't exist

@@ -12,4 +12,8 @@ public interface CommercialProjectServices {
 
     public void deleteCommercialProject(CommercialProject commercialProject);
 
+    public CommercialProject updateCommercialProject(CommercialProject commercialProject);
+
+    public CommercialProject getCommercialProjectById(Long id);
+
 }

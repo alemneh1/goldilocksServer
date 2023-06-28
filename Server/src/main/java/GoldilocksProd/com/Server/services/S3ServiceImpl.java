@@ -15,7 +15,7 @@ public interface S3ServiceImpl {
 
     byte[] downloadFile(String filename);
 
-    String deleteFile(String filename);
+    public String deleteImage(String presignedUrl);
 
     List<String> listAll();
 }

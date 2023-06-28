@@ -95,7 +95,7 @@ public class S3Service implements S3ServiceImpl {
         return url.toString();
     }
     @Override
-    public String deleteFile(String presignedUrl) {
+    public String deleteImage(String presignedUrl) {
         try {
             // Extract the object key from the pre-signed URL
             URL url = new URL(presignedUrl);
