@@ -2,8 +2,10 @@ package GoldilocksProd.com.Server;
 
 
 import GoldilocksProd.com.Server.projects.CommercialProject;
+import GoldilocksProd.com.Server.projects.MovieProject;
 import GoldilocksProd.com.Server.projects.MusicProject;
 import GoldilocksProd.com.Server.repository.CommercialProjectRepository;
+import GoldilocksProd.com.Server.repository.MovieProjectRepository;
 import GoldilocksProd.com.Server.repository.MusicProjectRepository;
 import GoldilocksProd.com.Server.services.S3Service;
 import lombok.AllArgsConstructor;
@@ -28,7 +30,7 @@ public class ServerApplication {
 	private S3Service s3Service;
 
 	@Bean
-	CommandLineRunner run(MusicProjectRepository musicRepo, CommercialProjectRepository commercialProjectRepository) {
+	CommandLineRunner run(MusicProjectRepository musicRepo, CommercialProjectRepository commercialProjectRepository, MovieProjectRepository movieProjectRepository) {
 		return args -> {
 			MusicProject musicProject = new MusicProject(
 					null,
@@ -52,30 +54,40 @@ public class ServerApplication {
 					"https://www.youtube.com/watch?v=8weSLMxDczY"
 			);
 
-			CommercialProject commercialProject = new CommercialProject(
+			MovieProject movieProject = new MovieProject(
 					null,
-					"Commercial",
-					"Expensive Personality\"",
-					"2018",
-					s3Service.getPresignedImageUrl("angold checku up.PNG", 5000),
+					"Movie",
+					"Up and Down",
+					"2021",
+					s3Service.getPresignedImageUrl("movi1.jpg", 5000),
 					"https://www.youtube.com/watch?v=8weSLMxDczY",
-					"This is one of Goldilocks production commercial that is used by some other people in time oif loerem alex is good"
+					"2:50",
+					"Napi Wendosen, Selam Tesfaye, Alemayew Chala, Mitiku Kinfe",
+					"Alexander Tedla",
+					"This movie is produced by goldilocks production and other disc ......"
+
+
 
 			);
-			CommercialProject commercialProject1 = new CommercialProject(
+			MovieProject movieProject2 = new MovieProject(
 					null,
-					"Commercial",
-					"Dega Water",
-					"2015",
-					s3Service.getPresignedImageUrl("Abe Kotu.jpg", 5000),
+					"Movie",
+					"The Java Hunter",
+					"2010",
+					s3Service.getPresignedImageUrl("movie2.jpg", 5000),
 					"https://www.youtube.com/watch?v=8weSLMxDczY",
-					"This is one of Goldilocks production commercial that is used by some other people in time oif loerem alex is good"
+					"3:50",
+					"Alex Tedla, Mitku, Alemayew Chala, Mitiku Kinfe",
+					"Alexander Tedla",
+					"This movie is produced by goldilocks production and other disc ......"
+
+
 
 			);
 			musicRepo.save(musicProject);
 			musicRepo.save(musicProject1);
-			commercialProjectRepository.save(commercialProject);
-			commercialProjectRepository.save(commercialProject1);
+			movieProjectRepository.save(movieProject);
+			movieProjectRepository.save(movieProject2);
 		};
 	}
 }
