@@ -110,6 +110,8 @@ public class MovieController {
         }
     }
 
+
+
     @GetMapping("/api/movie-project/list/")
     public List<MovieProject> list(){
         return movieProjectService.listAllMovieProject();

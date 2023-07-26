@@ -1,10 +1,10 @@
 package GoldilocksProd.com.Server;
 
-
-import GoldilocksProd.com.Server.projects.CommercialProject;
+import GoldilocksProd.com.Server.projects.DocumentaryProject;
 import GoldilocksProd.com.Server.projects.MovieProject;
 import GoldilocksProd.com.Server.projects.MusicProject;
 import GoldilocksProd.com.Server.repository.CommercialProjectRepository;
+import GoldilocksProd.com.Server.repository.DocumentaryProjectRepository;
 import GoldilocksProd.com.Server.repository.MovieProjectRepository;
 import GoldilocksProd.com.Server.repository.MusicProjectRepository;
 import GoldilocksProd.com.Server.services.S3Service;
@@ -30,7 +30,7 @@ public class ServerApplication {
 	private S3Service s3Service;
 
 	@Bean
-	CommandLineRunner run(MusicProjectRepository musicRepo, CommercialProjectRepository commercialProjectRepository, MovieProjectRepository movieProjectRepository) {
+	CommandLineRunner run(MusicProjectRepository musicRepo, CommercialProjectRepository commercialProjectRepository, MovieProjectRepository movieProjectRepository, DocumentaryProjectRepository documentaryProjectRepository) {
 		return args -> {
 			MusicProject musicProject = new MusicProject(
 					null,
@@ -50,7 +50,7 @@ public class ServerApplication {
 					"2022",
 					"Biruk Jane",
 					"Kotume is ormoifa song that was produced by Goldilocks producaiton",
-					s3Service.getPresignedImageUrl("ablex-dire.jpg", 5000),
+					s3Service.getPresignedImageUrl("photo_2022-11-14_15-25-55.jpg", 5000),
 					"https://www.youtube.com/watch?v=8weSLMxDczY"
 			);
 
@@ -59,35 +59,39 @@ public class ServerApplication {
 					"Movie",
 					"Up and Down",
 					"2021",
-					s3Service.getPresignedImageUrl("movi1.jpg", 5000),
+					s3Service.getPresignedImageUrl("Abe Kotu.jpg", 5000),
 					"https://www.youtube.com/watch?v=8weSLMxDczY",
 					"2:50",
 					"Napi Wendosen, Selam Tesfaye, Alemayew Chala, Mitiku Kinfe",
 					"Alexander Tedla",
 					"This movie is produced by goldilocks production and other disc ......"
-
-
-
 			);
 			MovieProject movieProject2 = new MovieProject(
 					null,
-					"Movie",
-					"The Java Hunter",
-					"2010",
-					s3Service.getPresignedImageUrl("movie2.jpg", 5000),
+					"Documentary",
+					"The Doc is real Hunter",
+					"2013",
+					s3Service.getPresignedImageUrl("Abe Kotu.jpg", 5000),
 					"https://www.youtube.com/watch?v=8weSLMxDczY",
 					"3:50",
 					"Alex Tedla, Mitku, Alemayew Chala, Mitiku Kinfe",
 					"Alexander Tedla",
 					"This movie is produced by goldilocks production and other disc ......"
 
-
-
 			);
+
+			DocumentaryProject documentaryProject = new DocumentaryProject(null,
+					"Documentary",
+					"The Java Hunter",
+					"2010",
+					s3Service.getPresignedImageUrl("kottu mef (2).jpg", 5000),
+					"https://www.youtube.com/watch?v=8weSLMxDczY","Alex Ander The Greate", "4:00","Hello doc i am working and then this clear that it will be greate if you do codding " );
+
 			musicRepo.save(musicProject);
 			musicRepo.save(musicProject1);
 			movieProjectRepository.save(movieProject);
 			movieProjectRepository.save(movieProject2);
+			documentaryProjectRepository.save(documentaryProject);
 		};
 	}
 }
