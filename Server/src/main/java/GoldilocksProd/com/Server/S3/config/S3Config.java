@@ -1,4 +1,4 @@
-package GoldilocksProd.com.Server.config;
+package GoldilocksProd.com.Server.S3.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

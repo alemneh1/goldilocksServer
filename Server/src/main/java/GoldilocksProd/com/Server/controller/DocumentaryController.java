@@ -1,8 +1,7 @@
 package GoldilocksProd.com.Server.controller;
 
 import GoldilocksProd.com.Server.projects.DocumentaryProject;
-import GoldilocksProd.com.Server.projects.MovieProject;
-import GoldilocksProd.com.Server.services.S3Service;
+import GoldilocksProd.com.Server.services.S3Service.S3Service;
 import GoldilocksProd.com.Server.services.documentaryService.DocumentaryProjectServices;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +44,7 @@ public class DocumentaryController {
             String originalFileName = file.getOriginalFilename();
             s3Service.addImage(file);
             //make sure to change this to 5 years
-            documentaryProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+            documentaryProject.setThumbnailPath(s3Service.getPermanentImageUrl(originalFileName));
         }
 
         documentaryProject.setProjectType(projectType);
@@ -76,8 +75,7 @@ public class DocumentaryController {
         if (file != null) {
             String originalFileName = file.getOriginalFilename();
             s3Service.addImage(file);
-            //make sure to change this to 5 years
-            existingDocumentaryProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+            existingDocumentaryProject.setThumbnailPath(s3Service.getPermanentImageUrl(originalFileName));
         }
         existingDocumentaryProject.setProjectType(projectType);
         existingDocumentaryProject.setTitle(title);

@@ -1,6 +1,6 @@
 package GoldilocksProd.com.Server.controller;
 
-import GoldilocksProd.com.Server.services.S3Service;
+import GoldilocksProd.com.Server.services.S3Service.S3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,6 +26,7 @@ public class S3Controller {
 
     @GetMapping("/download/{filename}")
     public ResponseEntity<byte[]> download(@PathVariable("filename") String filename) {
+
         byte[] fileData = s3Service.downloadFile(filename);
 
         HttpHeaders headers = new HttpHeaders();
@@ -36,7 +37,6 @@ public class S3Controller {
         } else {
             // Handle other image formats if needed
         }
-
         return new ResponseEntity<>(fileData, headers, HttpStatus.OK);
     }
 

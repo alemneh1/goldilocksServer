@@ -1,11 +1,9 @@
 package GoldilocksProd.com.Server.controller;
 
 import GoldilocksProd.com.Server.projects.MusicProject;
-import GoldilocksProd.com.Server.services.S3Service;
+import GoldilocksProd.com.Server.services.S3Service.S3Service;
 import GoldilocksProd.com.Server.services.musicService.MusicProjectServicesImp;
 
-import jakarta.persistence.Entity;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @RestController
@@ -48,7 +45,7 @@ public class MusicController {
             String originalFileName = file.getOriginalFilename();
             s3Service.addImage(file);
             //make sure to change this to 5 years
-            musicProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+            musicProject.setThumbnailPath(s3Service.getPermanentImageUrl(originalFileName));
         }
 
         musicProject.setProjectType(projectType);
@@ -79,7 +76,7 @@ public class MusicController {
         if (file != null) {
             String originalFileName = file.getOriginalFilename();
             s3Service.addImage(file);
-            existingMusicProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+            existingMusicProject.setThumbnailPath(s3Service.getPermanentImageUrl(originalFileName));
         }
 
         existingMusicProject.setProjectType(projectType);

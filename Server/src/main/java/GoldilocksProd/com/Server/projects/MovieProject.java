@@ -1,6 +1,7 @@
 package GoldilocksProd.com.Server.projects;
 
 import GoldilocksProd.com.Server.model.ProjectModel;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class MovieProject extends ProjectModel {
 
 
     private String movieLength;
+    @Column(name = "\"cast\"")
     private String cast;
     private String director;
     private String movieDescription;

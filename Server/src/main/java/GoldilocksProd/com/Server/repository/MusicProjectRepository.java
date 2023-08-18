@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MusicProjectRepository extends JpaRepository<MusicProject, Long> {
 
-    // Custom query methods can be added here if needed
+
 
 }

@@ -1,8 +1,7 @@
 package GoldilocksProd.com.Server.controller;
 
 import GoldilocksProd.com.Server.projects.CommercialProject;
-import GoldilocksProd.com.Server.projects.MusicProject;
-import GoldilocksProd.com.Server.services.S3Service;
+import GoldilocksProd.com.Server.services.S3Service.S3Service;
 import GoldilocksProd.com.Server.services.commercialService.CommercialProjectServicesImp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,16 +38,9 @@ public class CommercialController {
         CommercialProject commercialProject = new CommercialProject();
         if (file != null) {
             String originalFileName = file.getOriginalFilename();
-            //String contentType = file.getContentType();
-            //long fileSize = file.getSize();
 
-//            logger.info("Original File Name: " + originalFileName);
-//            logger.info("Content Type: " + contentType);
-//            logger.info("File Size: " + fileSize);
-
-            s3Service.addImage(file);
-            //make sure to change this to 5 years
-            commercialProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+            // Increase the expiration time to 10 years (315360000 seconds)
+            commercialProject.setThumbnailPath(s3Service.getPermanentImageUrl(originalFileName));
         }
         commercialProject.setProjectType(projectType);
         commercialProject.setTitle(title);
@@ -94,7 +86,7 @@ public class CommercialController {
         if (file != null) {
             String originalFileName = file.getOriginalFilename();
             s3Service.addImage(file);
-            existingCommercialProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+            existingCommercialProject.setThumbnailPath(s3Service.getPermanentImageUrl(originalFileName));
         }
 
         existingCommercialProject.setProjectType(projectType);

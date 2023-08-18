@@ -1,8 +1,7 @@
 package GoldilocksProd.com.Server.controller;
 
 import GoldilocksProd.com.Server.projects.MovieProject;
-import GoldilocksProd.com.Server.projects.MusicProject;
-import GoldilocksProd.com.Server.services.S3Service;
+import GoldilocksProd.com.Server.services.S3Service.S3Service;
 import GoldilocksProd.com.Server.services.movieService.MovieProjectServiceImp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +43,7 @@ public class MovieController {
             String originalFileName = file.getOriginalFilename();
             s3Service.addImage(file);
             //make sure to change this to 5 years
-            movieProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+            movieProject.setThumbnailPath(s3Service.getPermanentImageUrl(originalFileName));
         }
 
         movieProject.setProjectType(projectType);
@@ -77,7 +76,8 @@ public class MovieController {
         if (file != null) {
             String originalFileName = file.getOriginalFilename();
             s3Service.addImage(file);
-            existingMovieProject.setThumbnailPath(s3Service.getPresignedImageUrl(originalFileName, 1800));
+            // For ten years
+            existingMovieProject.setThumbnailPath(s3Service.getPermanentImageUrl(originalFileName));
         }
 
         existingMovieProject.setProjectType(projectType);

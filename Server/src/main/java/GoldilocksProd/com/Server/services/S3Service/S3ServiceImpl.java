@@ -1,4 +1,4 @@
-package GoldilocksProd.com.Server.services;
+package GoldilocksProd.com.Server.services.S3Service;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;

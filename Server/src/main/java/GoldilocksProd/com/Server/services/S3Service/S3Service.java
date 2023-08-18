@@ -1,4 +1,4 @@
-package GoldilocksProd.com.Server.services;
+package GoldilocksProd.com.Server.services.S3Service;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
@@ -84,15 +84,11 @@ public class S3Service implements S3ServiceImpl {
             throw new RuntimeException("Failed to download file from S3", e);
         }
     }
-    public String getPresignedImageUrl(String filename, int expirationTimeInSeconds) {
-        GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(bucketName, filename)
-                .withMethod(HttpMethod.GET)
-                .withExpiration(new Date(System.currentTimeMillis() + expirationTimeInSeconds * 1000));
+    public String getPermanentImageUrl(String filename) {
+        // Construct the URL using the bucket's base URL and the object key
+        String url = "https://" + bucketName + ".s3.amazonaws.com/" + filename;
 
-        URL url = s3.generatePresignedUrl(request);
-
-        // Return XML response with the presigned URL
-        return url.toString();
+        return url;
     }
     @Override
     public String deleteImage(String presignedUrl) {
